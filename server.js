@@ -11,6 +11,16 @@ app.set('view engine', 'ejs');
 
 // use res.render to load up an ejs view file
 
+
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    res.render('pages/error/404');
+    next(err);
+});
+
+
+
 // index page 
 app.get('/az', function(req, res) {
     res.render('pages/index', { units: 3, unit1: 12, unit2: 11, unit3: 13, reports: 100, drivers: 72, users: 4 });
@@ -27,6 +37,10 @@ app.get('/register', function(req, res) {
     res.render('pages/auth/register');
 });
 
+//fogot password
+app.get('/forgot_password', function(req, res) {
+    res.render('pages/auth/forgot_password');
+});
 
 
 
